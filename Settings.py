@@ -1,11 +1,6 @@
 import pygame
 
 pygame.init()
-
-font_style = pygame.font.SysFont("bahnschrift", 25)
-score_font = pygame.font.SysFont("comicsansms", 35)
-font = pygame.font.Font(None, 32)
-
 # Sets colour code
 white = (255, 255, 255)
 yellow = (255, 255, 102)
@@ -22,7 +17,7 @@ disp = pygame.display.set_mode((dis_width, dis_height))
 clock = pygame.time.Clock()
 
 # Creates name
-pygame.display.set_caption('Start Menu by Rowan McNally Harrison')
+pygame.display.set_caption('Snake en Speed by Rowan McNally Harrison')
 
 # Font Styles
 font_style = pygame.font.SysFont("bahnschrift", 25)

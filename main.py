@@ -14,7 +14,7 @@ lead_img = pygame.image.load('set_btn.png').convert_alpha()
 
 # create button instances
 start_button = button.Button((dis_width / 2) - (140 * 0.7), 150, start_img, 1)
-exit_button = button.Button((dis_width / 2) - (120 * 0.7), 350, exit_img, 1)
+exit_button = button.Button((dis_width / 2) - (140 * 0.7), 350, exit_img, 1)
 Leader_Button = button.Button((dis_width / 2) - (140 * 0.7), 250, lead_img, 1)
 
 #TeamUser_Call
@@ -51,7 +51,7 @@ def Solo_Team():
                         text += event.unicode
 
         disp.fill(white)
-        pygame.draw.rect(disp, black, (0, 0, 680, 480), 5)
+        pygame.draw.rect(disp, black, (0, 0, 640, 480), 5)
 
         # Render the current text.
         txt_surface = font.render(text, True, color)
@@ -165,15 +165,16 @@ def Snake_game():
     print("Score Saved")
 
 # Creates the message
-def message(msg, color):
-    mesg = font_style.render(msg, True, color)
-    disp.blit(mesg, [dis_width / 3, dis_height / 6])
+def message(msg, color, locol, locoh):
+    mesg = font_style.render(msg, False, color)
+    disp.blit(mesg,(locol,locoh))
 
 def gamerun():
     run = False
     while not run:
         disp.fill(white)
-        message("SNAKE AND MATHS", green)
+        pygame.draw.rect(disp, black, (0, 0, 640, 480), 5)
+        message("SNAKE AND Quick Typing", black, 100, 100)
         if start_button.draw(disp):
             print('Loaded TeamUser_Call') #Copy paste from TeamUser_Call.py
             Solo_Team()
