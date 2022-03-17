@@ -3,8 +3,6 @@ import pygame
 import pickle
 import button
 import os
-import TeamUser_Call
-import Snake
 import random
 
 
@@ -176,7 +174,6 @@ def gamerun():
     while not run:
         disp.fill(white)
         message("SNAKE AND MATHS", green)
-        pygame.draw.rect()
         if start_button.draw(disp):
             print('Loaded TeamUser_Call') #Copy paste from TeamUser_Call.py
             Solo_Team()
