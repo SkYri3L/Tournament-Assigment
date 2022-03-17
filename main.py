@@ -80,6 +80,7 @@ def Your_score(score):
 def our_snake(snake_block, snake_list):
     for x in snake_list:
         pygame.draw.rect(disp, black, [x[0], x[1], snake_block, snake_block])
+
 def Snake_game():
     clock = pygame.time.Clock()
     snake_block = 10
@@ -173,8 +174,9 @@ def message(msg, color):
 def gamerun():
     run = False
     while not run:
-        disp.fill(blue)
+        disp.fill(white)
         message("SNAKE AND MATHS", green)
+        pygame.draw.rect()
         if start_button.draw(disp):
             print('Loaded TeamUser_Call') #Copy paste from TeamUser_Call.py
             Solo_Team()
