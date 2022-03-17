@@ -5,7 +5,6 @@ import button
 import os
 import random
 
-
 # load button images
 start_img = pygame.image.load('start_btn.png').convert_alpha()
 exit_img = pygame.image.load('exit_btn.png').convert_alpha()
@@ -211,7 +210,5 @@ def gamerun():
 
         # Updates Display
         pygame.display.update()
-
-
 
 gamerun()
