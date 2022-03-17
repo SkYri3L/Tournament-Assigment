@@ -5,9 +5,7 @@ import random
 pygame.init()
 
 pygame.display.set_caption('Snake')
-
 clock = pygame.time.Clock()
-
 snake_block = 10
 snake_speed = 15
 
@@ -46,8 +44,6 @@ def our_snake(snake_block, snake_list):
 def message(msg, color):
     mesg = font_style.render(msg, True, color)
     disp.blit(mesg, [dis_width / 3, dis_height / 6])
-
-
 
 def gameLoop():
     game_over = False
@@ -132,5 +128,3 @@ def gameLoop():
     print("Score Saved")
     pygame.quit()
     quit()
-
-

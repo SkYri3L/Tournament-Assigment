@@ -32,8 +32,6 @@ font_style = pygame.font.SysFont("bahnschrift", 25)
 score_font = pygame.font.SysFont("comicsansms", 35)
 font = pygame.font.Font(None, 32)
 
-
-
 white = white
 yellow = yellow
 black = black
