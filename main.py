@@ -4,6 +4,7 @@ import pickle
 import button
 import os
 import random
+from Quick_Typing import Game
 
 # load button images
 start_img = pygame.image.load('start_btn.png').convert_alpha()
@@ -193,7 +194,7 @@ def gamerun():
                 print("Snake Score is " + str(snake_score))
 
             print("Speed Typing")
-
+            Game.run()
             #QTyping()
             #with open('Typing_Score.pkl', 'rb') as type_scr:
                 #typing_score = pickle.load(type_scr)
