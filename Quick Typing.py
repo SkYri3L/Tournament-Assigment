@@ -3,28 +3,28 @@ from pygame.locals import *
 import sys
 import time
 import random
-
 class Game:
-
     def __init__(self):
-        self.w=640
-        self.h=480
-        self.reset = True
+        self.w=750
+        self.h=500
+        self.reset=True
         self.active = False
-        self.input_text = ''
+        self.input_text=''
         self.word = ''
         self.time_start = 0
         self.total_time = 0
         self.accuracy = '0%'
-        self.results = 'Wpm:0'
+        self.results = 'Time:0 Accuracy:0 % Wpm:0 '
         self.wpm = 0
         self.end = False
-        self.head_c  = (255,213.102)
-        self.text_c = (240,240,240)
-        self.result_c = (255,70, 70)
+        self.HEAD_C = (255,213,102)
+        self.TEXT_C = (240,240,240)
+        self.RESULT_C = (255,70,70)
         pygame.init()
         self.bg = pygame.image.load('background.jpg')
-        self.bg = pygame.transform.scale(bg, (h,w))
+        self.bg = pygame.transform.scale(self.bg, (500,750))
+        self.screen = pygame.display.set_mode((self.w,self.h))
+        pygame.display.set_caption('Type Speed test')
 
     def draw_text(self, screen, msg, y ,fsize, color):
         font = pygame.font.Font(None, fsize)
