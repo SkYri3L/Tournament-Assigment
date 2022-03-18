@@ -54,7 +54,7 @@ def Solo_Team():
 
         # Render the current text.
         txt_surface = font.render(text, True, color)
-        message("Enter Team Name or Username", black)
+        message("Enter Team Name or Username", black,100 ,50)
 
         # Resize the box if the text is too long.
         width = max(200, txt_surface.get_width() + 10)
@@ -103,7 +103,7 @@ def Snake_game():
             disp.fill(white)
             #Draws the outline
             pygame.draw.rect(disp, black, (0, 0, 680, 480), 5)
-            message("You Lost! Press Q to Quit", black)
+            message("You Lost! Press Q to Quit", black, 100, 100)
             Your_score(Length_of_snake - 1)
             pygame.display.update()
 
