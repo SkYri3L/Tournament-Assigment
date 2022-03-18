@@ -80,12 +80,12 @@ class Game:
                 elif event.type == pygame.MOUSEBUTTONUP:
                     x,y = pygame.mouse.get_pos()
                     # position of input box
-                    if(x>=50 and x<=650 and y>=250 and y<=300):
+                    if 50 <= x <= 650 and 250 <= y <= 300:
                         self.active = True
                         self.input_text = ''
                         self.time_start = time.time()
                      # position of reset box
-                     if(x>=310 and x<=510 and y>=390 and self.end):
+                     if 310 <= x <= 510 and y>=390 and self.end:
                         self.reset_game()
                         x,y = pygame.mouse.get_pos()
                 elif event.type == pygame.KEYDOWN:
