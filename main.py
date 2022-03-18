@@ -18,7 +18,7 @@ Leader_Button = button.Button((dis_width / 2) - (140 * 0.7), 250, lead_img, 1)
 
 #TeamUser_Call
 def Solo_Team():
-    input_box = pygame.Rect(100, 100, 0, 32)
+    input_box = pygame.Rect(50, 100, 0, 32)
     color_inactive = pygame.Color('lightskyblue3')
     color_active = pygame.Color('dodgerblue2')
     color = color_inactive
@@ -52,13 +52,14 @@ def Solo_Team():
         disp.fill(white)
         pygame.draw.rect(disp, black, (0, 0, 640, 480), 5)
 
-        # Render the current text.
+        # Render the current text
         txt_surface = font.render(text, True, color)
         message("Enter Team Name or Username", black,100 ,50)
 
         # Resize the box if the text is too long.
         width = max(200, txt_surface.get_width() + 10)
-        input_box.w = width
+        if width != 480 or width >= 480:
+            input_box.w = width
 
         # Blit the text.
         disp.blit(txt_surface, (input_box.x + 5, input_box.y + 5))
@@ -98,7 +99,6 @@ def Snake_game():
     foody = round(random.randrange(0, dis_height - snake_block) / 10.0) * 10.0
 
     while not game_over:
-
         while game_close == True:
             disp.fill(white)
             #Draws the outline
@@ -121,12 +121,15 @@ def Snake_game():
                     x1_change = -snake_block
                     y1_change = 0
                 elif event.key == pygame.K_RIGHT:
+
                     x1_change = snake_block
                     y1_change = 0
                 elif event.key == pygame.K_UP:
+
                     y1_change = -snake_block
                     x1_change = 0
                 elif event.key == pygame.K_DOWN:
+
                     y1_change = snake_block
                     x1_change = 0
 
