@@ -113,7 +113,7 @@ class Qtyping:
                             self.draw_text(self.screen, self.results, 350, 28, self.RESULT_C)
                             time.sleep(5)
                             self.end = True
-                            pygame.quit()
+                            break
                         elif event.key == pygame.K_BACKSPACE:
                             self.input_text = self.input_text[:-1]
                         else:
