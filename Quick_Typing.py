@@ -111,7 +111,6 @@ class Game:
             clock.tick(60)
 
     def reset_game(self):
-        self.screen.blit(self.open_img, (0,0))
         pygame.display.update()
         time.sleep(1)
         self.reset=False
