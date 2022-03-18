@@ -54,7 +54,7 @@ def Solo_Team():
 
         # Render the current text.
         txt_surface = font.render(text, True, color)
-        message("Enter Team Name or Username", black)
+        message("Enter Team Name or Username", black,100 ,50)
 
         # Resize the box if the text is too long.
         width = max(200, txt_surface.get_width() + 10)
