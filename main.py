@@ -103,7 +103,7 @@ def Snake_game():
             disp.fill(white)
             #Draws the outline
             pygame.draw.rect(disp, black, (0, 0, 680, 480), 5)
-            message("You Lost! Press Q to Quit", black, 100, 100)
+            message("Press Q to return to the menu", black, 100, 100)
             Your_score(Length_of_snake - 1)
             pygame.display.update()
 
@@ -178,6 +178,7 @@ def gamerun():
         pygame.draw.rect(disp, black, (0, 0, 640, 480), 5)
         message("SNAKE AND Quick Typing", black, 100, 100)
         if start_button.draw(disp):
+
             print('Loaded TeamUser_Call') #Copy paste from TeamUser_Call.py
             Solo_Team()
             with open('TeamUserName.pkl', 'rb') as SavName:
@@ -192,7 +193,8 @@ def gamerun():
                 print("Snake Score is " + str(snake_score))
 
             print("Speed Typing")
-            #os.system('Quick Typing.py')
+
+            #QTyping()
             #with open('Typing_Score.pkl', 'rb') as type_scr:
                 #typing_score = pickle.load(type_scr)
 
