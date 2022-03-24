@@ -10,8 +10,8 @@ green = (0, 255, 0)
 blue = (50, 153, 213)
 
 # create display window
-dis_height = 480
-dis_width = 640
+dis_height = 506
+dis_width = 332
 
 disp = pygame.display.set_mode((dis_width, dis_height))
 clock = pygame.time.Clock()

@@ -12,6 +12,8 @@ import time
 start_img = pygame.image.load('start_btn.png').convert_alpha()
 exit_img = pygame.image.load('exit_btn.png').convert_alpha()
 lead_img = pygame.image.load('set_btn.png').convert_alpha()
+empty_img = pygame.image.load('empty_btn.png').convert_alpha()
+
 
 # create button instances
 start_button = button.Button((dis_width / 2) - (140 * 0.7), 150, start_img, 1)
