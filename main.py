@@ -309,6 +309,8 @@ def Snake_game():
 def leaderboard():
     print(savedname)
     print(snakescore)
+    print(type_scr)
+
 
 
 
@@ -343,6 +345,7 @@ def gamerun():
             Qtyping().run()
             with open('Typing_Score.pkl', 'rb') as type_scr:
                 typing_score = pickle.load(type_scr)
+                print("Typing Score is: ", type_scr)
             pass
         if Leader_Button.draw(disp):
             leaderboard()
