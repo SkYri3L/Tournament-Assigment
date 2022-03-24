@@ -345,6 +345,7 @@ def gamerun():
                 typing_score = pickle.load(type_scr)
             pass
         if Leader_Button.draw(disp):
+            leaderboard()
             print ("leaderboard")
             pass
 
