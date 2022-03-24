@@ -315,9 +315,8 @@ def Snake_game():
 
 #Saves Names with score
 def leaderboard():
-    print(savedname)
-    print(snake_scr)
-    print(type_scr)
+    pass
+
 
 
 
@@ -354,13 +353,13 @@ def gamerun():
         if Leader_Button.draw(disp):
             with open('TeamUserName.pkl', 'rb') as SavName:
                 savedname = pickle.load(SavName)
-                print("Opened Savedname")
+            print("Opened Savedname")
             with open('Snake_score.pkl', 'rb') as snake_scr:
                 snake_score = pickle.load((snake_scr))
-                print("Opened Snake score")
+            print("Opened Snake score")
             with open('Typing_Score.pkl', 'rb') as type_scr:
                 typing_score = pickle.load((type_scr))
-                print("Typing Score loaded")
+            print("Typing Score loaded")
             leaderboard()
             print ("leaderboard")
             pass
