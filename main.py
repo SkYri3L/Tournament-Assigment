@@ -114,7 +114,7 @@ class Qtyping:
                             time.sleep(5)
                             with open('Typing_Score.pkl', 'wb') as Tscore:
                                 pickle.dump(self.results, Tscore)
-                                break
+                                pass
                             self.end = True
                         elif event.key == pygame.K_BACKSPACE:
                             self.input_text = self.input_text[:-1]
@@ -343,10 +343,10 @@ def gamerun():
             Qtyping().run()
             with open('Typing_Score.pkl', 'rb') as type_scr:
                 typing_score = pickle.load(type_scr)
-
+            pass
         if Leader_Button.draw(disp):
             print ("leaderboard")
-            break
+            pass
 
         if exit_button.draw(disp):
             print('EXIT')
