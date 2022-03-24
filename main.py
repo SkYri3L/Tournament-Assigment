@@ -117,7 +117,7 @@ class Qtyping:
                             with open('Typing_Score.pkl', 'wb') as Tscore:
                                 pickle.dump(self.results, Tscore)
                                 pass
-                            gamerun()
+                            pass
                         elif event.key == pygame.K_BACKSPACE:
                             self.input_text = self.input_text[:-1]
                         else:
@@ -310,7 +310,7 @@ def Snake_game():
 #Saves Names with score
 def leaderboard():
     print(savedname)
-    print(snakescore)
+    print(snake_scr)
     print(type_scr)
 
 
@@ -324,40 +324,43 @@ def message(msg, color, locol, locoh):
 
 
 def gamerun():
+    global savedname
+    global snake_scr
+    global type_scr
+    global x
     run = False
     while not run:
+        with open('TeamUserName.pkl', 'rb') as SavName:
+            savedname = pickle.load(SavName)
+            print("Opened Savedname")
+        with open('Snake_score.pkl', 'rb') as snake_scr:
+            snake_score = pickle.load(snake_scr)
+            print("Opened Snake score")
+        with open('Typing_Score.pkl', 'rb') as type_scr:
+            typing_score = pickle.load(type_scr)
+            print("Typing Score loaded")
         disp.fill(white)
-        pygame.draw.rect(disp, black, (0, 0, 640, 480), 5)
-        message("SNAKE AND Quick Typing", black, 100, 100)
+        pygame.draw.rect(disp, black, (0, 0, 332, 506), 5)
+        message("Snake and Quick Typing Test", black, 8, 50)
         if start_button.draw(disp):
             print('Loaded TeamUser_Call')  # Copy paste from TeamUser_Call.py
             Solo_Team()
-            with open('TeamUserName.pkl', 'rb') as SavName:
-                savedname = pickle.load(SavName)
-                print(savedname)
 
             # Snake.py Run
-            print("Snake.py has been opened")  # Testing if .py has been opened
+            print("Loaded Snake_Game")  # Testing if .py has been opened
             Snake_game()
-            with open('Snake_score.pkl', 'rb') as snake_scr:
-                snake_score = pickle.load(snake_scr)
-                print("Snake Score is " + str(snake_score))
 
-            print("Speed Typing")
+            print("Loaded Qtyping = Typing Test")
             Qtyping().run()
-            with open('Typing_Score.pkl', 'rb') as type_scr:
-                typing_score = pickle.load(type_scr)
-                print("Typing Score is: ", type_scr)
             pass
         if Leader_Button.draw(disp):
             leaderboard()
             print ("leaderboard")
             pass
-
         if exit_button.draw(disp):
             print('EXIT')
             pygame.quit()
-            quit()
+            x = 0
 
         # event handler
         for event in pygame.event.get():
@@ -367,6 +370,6 @@ def gamerun():
 
         # Updates Display
         pygame.display.update()
-
-
-gamerun()
+x =  1
+while x == 1:
+    gamerun()
