@@ -112,8 +112,8 @@ class Qtyping:
                             print(self.results)
                             self.draw_text(self.screen, self.results, 350, 28, self.RESULT_C)
                             time.sleep(5)
-                            with open('Typing_Score.pkl', 'wb') as Tscore
-                            pickle.dump(self.results, Tscore)
+                            with open('Typing_Score.pkl', 'wb') as Tscore:
+                                pickle.dump(self.results, Tscore)
                             self.end = True
                         elif event.key == pygame.K_BACKSPACE:
                             self.input_text = self.input_text[:-1]
