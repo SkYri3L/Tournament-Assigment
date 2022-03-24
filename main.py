@@ -115,7 +115,7 @@ class Qtyping:
                             with open('Typing_Score.pkl', 'wb') as Tscore:
                                 pickle.dump(self.results, Tscore)
                                 pass
-                            self.end = True
+                            gamerun()
                         elif event.key == pygame.K_BACKSPACE:
                             self.input_text = self.input_text[:-1]
                         else:
