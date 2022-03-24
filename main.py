@@ -112,7 +112,8 @@ class Qtyping:
                             print(self.results)
                             self.draw_text(self.screen, self.results, 350, 28, self.RESULT_C)
                             time.sleep(5)
-                            pickle.dump(self.results, open('Typing_Score.pkl'), 'wb')
+                            with open('Typing_Score.pkl', 'wb') as Tscore
+                            pickle.dump(self.results, Tscore)
                             self.end = True
                         elif event.key == pygame.K_BACKSPACE:
                             self.input_text = self.input_text[:-1]
@@ -307,7 +308,7 @@ def Snake_game():
 def leaderboard():
     print(savedname)
     print(snakescore)
-    print
+
 
 
 
@@ -343,6 +344,7 @@ def gamerun():
                 typing_score = pickle.load(type_scr)
 
         if Leader_Button.draw(disp):
+            print ("leaderboard")
             break
 
         if exit_button.draw(disp):
