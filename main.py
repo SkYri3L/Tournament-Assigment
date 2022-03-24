@@ -315,7 +315,9 @@ def Snake_game():
 
 #Saves Names with score
 def leaderboard():
-    pass
+    print(savedname)
+    print(snake_scr)
+    print(type_scr)
 
 
 
