@@ -112,8 +112,8 @@ class Qtyping:
                             print(self.results)
                             self.draw_text(self.screen, self.results, 350, 28, self.RESULT_C)
                             time.sleep(5)
+                            pickle.dump(self.results, open('Typing_Score.pkl'), 'wb')
                             self.end = True
-                            break
                         elif event.key == pygame.K_BACKSPACE:
                             self.input_text = self.input_text[:-1]
                         else:
@@ -175,7 +175,8 @@ def Solo_Team():
                 if active:
                     if event.key == pygame.K_RETURN:
                         print(text)
-                        pickle.dump(text, open('TeamUserName.pkl', 'wb'))
+                        User_name = text
+                        pickle.dump(User_name, open('TeamUserName.pkl', 'wb'))
                         done = True
                     elif event.key == pygame.K_BACKSPACE:
                         text = text[:-1]
@@ -302,7 +303,12 @@ def Snake_game():
     pickle.dump(Length_of_snake - 1, open('Snake_Score.pkl', 'wb'))
     print("Score Saved")
 
+#Saves Names with score
 def leaderboard():
+    print(savedname)
+    print(snakescore)
+    print
+
 
 
 # Creates the message
@@ -333,11 +339,11 @@ def gamerun():
 
             print("Speed Typing")
             Qtyping().run()
-            # with open('Typing_Score.pkl', 'rb') as type_scr:
-            # typing_score = pickle.load(type_scr)
+            with open('Typing_Score.pkl', 'rb') as type_scr:
+                typing_score = pickle.load(type_scr)
 
         if Leader_Button.draw(disp):
-
+            break
 
         if exit_button.draw(disp):
             print('EXIT')
