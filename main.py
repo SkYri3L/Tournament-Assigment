@@ -20,6 +20,12 @@ start_button = button.Button((dis_width / 2) - (140 * 0.7), 150, start_img, 1)
 exit_button = button.Button((dis_width / 2) - (140 * 0.7), 350, exit_img, 1)
 Leader_Button = button.Button((dis_width / 2) - (140 * 0.7), 250, lead_img, 1)
 
+def reschange():
+    width = 332
+    height = 506
+    screen = pygame.display.set_mode((width, height))
+
+
 
 class Qtyping:
     def __init__(self):
@@ -349,10 +355,10 @@ def gamerun():
                 savedname = pickle.load(SavName)
                 print("Opened Savedname")
             with open('Snake_score.pkl', 'rb') as snake_scr:
-                snake_score = pickle.load(snake_scr)
+                snake_score = pickle.load((snake_scr))
                 print("Opened Snake score")
             with open('Typing_Score.pkl', 'rb') as type_scr:
-                typing_score = pickle.load(type_scr)
+                typing_score = pickle.load((type_scr))
                 print("Typing Score loaded")
             leaderboard()
             print ("leaderboard")
