@@ -208,7 +208,7 @@ def Your_score(score):
     disp.blit(value, [6, 0])
 
 
-# snake timemk
+# snake time
 def our_snake(snake_block, snake_list):
     for x in snake_list:
         pygame.draw.rect(disp, black, [x[0], x[1], snake_block, snake_block])
@@ -301,6 +301,8 @@ def Snake_game():
     pickle.dump(Length_of_snake - 1, open('Snake_Score.pkl', 'wb'))
     print("Score Saved")
 
+
+
 # Creates the message
 def message(msg, color, locol, locoh):
     mesg = font_style.render(msg, False, color)
@@ -333,8 +335,7 @@ def gamerun():
             # typing_score = pickle.load(type_scr)
 
         if Leader_Button.draw(disp):
-            print("Leader Board")
-            os.system('Leaderboard.py')
+
 
         if exit_button.draw(disp):
             print('EXIT')
