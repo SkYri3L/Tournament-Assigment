@@ -336,6 +336,7 @@ def gamerun():
     global x
     run = False
     while not run:
+        reschange()
         disp.fill(white)
         pygame.draw.rect(disp, black, (0, 0, 332, 506), 5)
         message("Snake and Quick Typing Test", black, 8, 50)
