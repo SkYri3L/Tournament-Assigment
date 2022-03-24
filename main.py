@@ -176,6 +176,7 @@ def Solo_Team():
                     if event.key == pygame.K_RETURN:
                         print(text)
                         pickle.dump(text, open('TeamUserName.pkl', 'wb'))
+                        done = True
                     elif event.key == pygame.K_BACKSPACE:
                         text = text[:-1]
                     else:
@@ -301,6 +302,7 @@ def Snake_game():
     pickle.dump(Length_of_snake - 1, open('Snake_Score.pkl', 'wb'))
     print("Score Saved")
 
+def leaderboard():
 
 
 # Creates the message
