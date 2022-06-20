@@ -13,10 +13,16 @@ start_img = pygame.image.load('start_btn.png').convert_alpha()
 exit_img = pygame.image.load('exit_btn.png').convert_alpha()
 lead_img = pygame.image.load('set_btn.png').convert_alpha()
 
-# create button instances
-start_button = button.Button((dis_width / 2) - (140 * 0.7), 150, start_img, 1)
-exit_button = button.Button((dis_width / 2) - (140 * 0.7), 350, exit_img, 1)
-Leader_Button = button.Button((dis_width / 2) - (140 * 0.7), 250, lead_img, 1)
+#loaded saved data
+with open('TeamUserName.pkl', 'rb') as SavName:
+    L_user_saved = pickle.load(SavName)
+    print("Loaded Last Saved User: ",L_user_saved)
+with open('Snake_score.pkl', 'rb') as snake_scr:
+    L_snake_score = pickle.load(snake_scr)
+    print("Loaded last Saved Snake Score: ",L_snake_score)
+with open('WPM.pkl', 'rb') as typesc:
+    L_wpm = pickle.load(typesc)
+    print("Loaded last saved WPM: ", L_wpm)
 
 
 class Qtyping:
@@ -73,16 +79,12 @@ class Qtyping:
             self.wpm = len(self.input_text) * 60 / (5 * self.total_time)
             self.end = True
             print(self.total_time)
-            self.results = 'Time:' + str(round(self.total_time)) + " secs Accuracy:" + str(
-                round(self.accuracy)) + "%" + ' Wpm: ' + str(round(self.wpm))
+            self.results = 'Time:' + str(round(self.total_time)) + " secs Accuracy:" + str(round(self.accuracy)) + "%" + ' Wpm: ' + str(round(self.wpm))
+            pickle.dump(self.wpm, open('WPM.pkl', 'wb'))
             # draw icon image
-            self.time_img = pygame.image.load('icon.png')
-            self.time_img = pygame.transform.scale(self.time_img, (150, 150))
-            # screen.blit(self.time_img, (80,320))
-            screen.blit(self.time_img, (self.w / 2 - 75, self.h - 140))
-            self.draw_text(screen, "Reset", self.h - 70, 26, (100, 100, 100))
             print(self.results)
             pygame.display.update()
+
 
     def run(self):
         self.reset_game()
@@ -112,7 +114,7 @@ class Qtyping:
                             print(self.results)
                             self.draw_text(self.screen, self.results, 350, 28, self.RESULT_C)
                             time.sleep(5)
-                            self.end = True
+                            gamerun()
                             break
                         elif event.key == pygame.K_BACKSPACE:
                             self.input_text = self.input_text[:-1]
@@ -127,9 +129,9 @@ class Qtyping:
     def reset_game(self):
         pygame.display.update()
         time.sleep(1)
-        self.reset=False
+        self.reset = False
         self.end = False
-        self.input_text=''
+        self.input_text = ''
         self.word = ''
         self.time_start = 0
         self.total_time = 0
@@ -137,15 +139,15 @@ class Qtyping:
         # Get random sentence
         self.word = self.get_sentence()
         if (not self.word): self.reset_game()
-        #drawing heading
-        self.screen.fill((0,0,0))
-        self.screen.blit(self.bg,(0,0))
+        # drawing heading
+        self.screen.fill((0, 0, 0))
+        self.screen.blit(self.bg, (0, 0))
         msg = "Typing Speed Test"
-        self.draw_text(self.screen, msg,80, 80,self.HEAD_C)
+        self.draw_text(self.screen, msg, 80, 80, self.HEAD_C)
         # draw the rectangle for input box
-        pygame.draw.rect(self.screen,(255,192,25), (50,250,650,50), 2)
+        pygame.draw.rect(self.screen, (255, 192, 25), (50, 250, 650, 50), 2)
         # draw the sentence string
-        self.draw_text(self.screen, self.word,200, 28,self.TEXT_C)
+        self.draw_text(self.screen, self.word, 200, 28, self.TEXT_C)
         pygame.display.update()
 
 # TeamUser_Call
@@ -176,6 +178,7 @@ def Solo_Team():
                     if event.key == pygame.K_RETURN:
                         print(text)
                         pickle.dump(text, open('TeamUserName.pkl', 'wb'))
+                        done = True
                     elif event.key == pygame.K_BACKSPACE:
                         text = text[:-1]
                     else:
@@ -301,6 +304,7 @@ def Snake_game():
     pickle.dump(Length_of_snake - 1, open('Snake_Score.pkl', 'wb'))
     print("Score Saved")
 
+
 # Creates the message
 def message(msg, color, locol, locoh):
     mesg = font_style.render(msg, False, color)
@@ -308,38 +312,37 @@ def message(msg, color, locol, locoh):
 
 
 def gamerun():
+    # create button instances
+    start_button = button.Button((dis_width / 2) - (140 * 0.7), 150, start_img, 1)
+    exit_button = button.Button((dis_width / 2) - (140 * 0.7), 350, exit_img, 1)
+    Leader_Button = button.Button((dis_width / 2) - (140 * 0.7), 250, lead_img, 1)
+
     run = False
     while not run:
+        saved = ""
         disp.fill(white)
-        pygame.draw.rect(disp, black, (0, 0, 640, 480), 5)
-        message("SNAKE AND Quick Typing", black, 100, 100)
-        if start_button.draw(disp):
-            print('Loaded TeamUser_Call')  # Copy paste from TeamUser_Call.py
+        pygame.draw.rect(disp, black, (0, 0, 640*2, 480*2), 5)
+        message("SNAKE AND Quick Typing", black, 500,50)
+        if start_button.draw(disp):  # main start once pressing start button
+            print('Solo_Team has been Loaded')
             Solo_Team()
-            with open('TeamUserName.pkl', 'rb') as SavName:
-                savedname = pickle.load(SavName)
-                print(savedname)
 
             # Snake.py Run
-            print("Snake.py has been opened")  # Testing if .py has been opened
+            print("Snake_Game has been Loaded")
             Snake_game()
-            with open('Snake_score.pkl', 'rb') as snake_scr:
-                snake_score = pickle.load(snake_scr)
-                print("Snake Score is " + str(snake_score))
 
             print("Speed Typing")
             Qtyping().run()
-            # with open('Typing_Score.pkl', 'rb') as type_scr:
-            # typing_score = pickle.load(type_scr)
 
         if Leader_Button.draw(disp):
-            print("Leader Board")
-            os.system('Leaderboard.py')
+            disp.fill(white)
+            print("User: ",L_user_saved)
+            print("Snake Score: ",L_snake_score)
+            print("WPM: ",L_wpm)
 
         if exit_button.draw(disp):
             print('EXIT')
             pygame.quit()
-            quit()
 
         # event handler
         for event in pygame.event.get():
@@ -349,6 +352,5 @@ def gamerun():
 
         # Updates Display
         pygame.display.update()
-
 
 gamerun()
