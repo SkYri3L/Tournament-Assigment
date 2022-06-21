@@ -8,12 +8,14 @@ import sys
 import random
 import time
 
+
 # load button images
 start_img = pygame.image.load('start_btn.png').convert_alpha()
 exit_img = pygame.image.load('exit_btn.png').convert_alpha()
 lead_img = pygame.image.load('set_btn.png').convert_alpha()
 
-#loaded saved data
+
+# loaded saved data
 def old_name_load():
     global oldname_nodata
     oldname_nodata = False
@@ -24,6 +26,8 @@ def old_name_load():
         print("no data name")
         oldname_nodata = True
         return None
+
+
 def old_snake_load():
     global snake_nodata
     snake_nodata = False
@@ -34,6 +38,8 @@ def old_snake_load():
         print("no data snake")
         snake_nodata = True
         return None
+
+
 def old_wpm_load():
     global wpm_nodata
     wpm_nodata = False
@@ -45,47 +51,49 @@ def old_wpm_load():
         wpm_nodata = True
         return None
 
-def old_data_load():
-    global L_wpm
-    global L_user_saved
-    global L_snake_score
+def player_check():
     global data
+    global Player
+    global olduser_saved
+    global oldsnake_score
+    global oldwpm
     old_wpm_load()
     old_snake_load()
     old_name_load()
-    data = True
-    if oldname_nodata != True:
-        with open('TeamUserName.pkl','rb') as oldname:
-            L_user_saved = pickle.load(oldname)
-            print("Old TeamName Loaded")
-    if snake_nodata != True:
-        with open('Snake_Score.pkl','rb') as oldsnake:
-            L_snake_score = pickle.load(oldsnake)
-            print("Old Snake Loaded")
-    if wpm_nodata != True:
-        with open('WPM.pkl','rb') as oldwpm:
-            L_wpm = pickle.load(oldwpm)
-            print("Old Wpm Loaded")
-    if oldname_nodata == True and snake_nodata == True and wpm_nodata == True:
-        print("No data Found")
+    if wpm_nodata == True and snake_nodata == True and oldname_nodata == True:
+        Player = 1
         data = False
+    elif wpm_nodata == False and snake_nodata == False and oldname_nodata == False:
+        Player = 2
+        data = True
+        if oldname_nodata != True:
+            with open('TeamUserName.pkl', 'rb') as oldname:
+                olduser_saved = pickle.load(oldname)
+                print("Old TeamName Loaded")
+        if snake_nodata != True:
+            with open('Snake_Score.pkl', 'rb') as oldsnake:
+                oldsnake_score = pickle.load(oldsnake)
+                print("Old Snake Loaded")
+        if wpm_nodata != True:
+            with open('WPM.pkl', 'rb') as oldwpm:
+                oldwpm = pickle.load(oldwpm)
+                print("Old Wpm Loaded")
 
-def new_saved():
-    global N_user_saved
-    global N_snake_score
-    global N_wpm
-    if data == False:
-        with open('TeamUserName.pkl', 'rb') as SavName:
-            N_user_saved = pickle.load(SavName)
-            print("Loaded Last Saved User: ", L_user_saved)
-        with open('Snake_score.pkl', 'rb') as snake_scr:
-            N_snake_score = pickle.load(snake_scr)
-            print("Loaded last Saved Snake Score: ", L_snake_score)
-        with open('WPM.pkl', 'rb') as typesc:
-            N_wpm = pickle.load(typesc)
-            print("Loaded last saved WPM: ", L_wpm)
-    else:
-        pass
+
+def load_save():
+    global user_saved
+    global snake_score
+    global wpmScore
+    with open('TeamUserName.pkl', 'rb') as SavName:
+        user_saved = pickle.load(SavName)
+        print("Loaded Saved User: ", user_saved)
+    with open('Snake_score.pkl', 'rb') as snake_scr:
+        snake_score = pickle.load(snake_scr)
+        print("Loaded Saved Snake Score: ", snake_score)
+    with open('WPM.pkl', 'rb') as typesc:
+        wpmScore = pickle.load(typesc)
+        print("Loaded saved WPM: ", wpmScore)
+
 
 class Qtyping:
     def __init__(self):
@@ -109,7 +117,6 @@ class Qtyping:
         self.bg = pygame.image.load('background.jpg')
         self.bg = pygame.transform.scale(self.bg, (500, 750))
         self.screen = pygame.display.set_mode((self.w, self.h))
-        pygame.display.set_caption('Type Speed test')
 
     def draw_text(self, screen, msg, y, fsize, color):
         font = pygame.font.Font(None, fsize)
@@ -141,12 +148,12 @@ class Qtyping:
             self.wpm = len(self.input_text) * 60 / (5 * self.total_time)
             self.end = True
             print(self.total_time)
-            self.results = 'Time:' + str(round(self.total_time)) + " secs Accuracy:" + str(round(self.accuracy)) + "%" + ' Wpm: ' + str(round(self.wpm))
+            self.results = 'Time:' + str(round(self.total_time)) + " secs Accuracy:" + str(
+                round(self.accuracy)) + "%" + ' Wpm: ' + str(round(self.wpm))
             pickle.dump(self.wpm, open('WPM.pkl', 'wb'))
             # draw icon image
             print(self.results)
             pygame.display.update()
-
 
     def run(self):
         self.reset_game()
@@ -175,7 +182,7 @@ class Qtyping:
                             self.show_results(self.screen)
                             print(self.results)
                             self.draw_text(self.screen, self.results, 350, 28, self.RESULT_C)
-                            time.sleep(5)
+                            time.sleep(2)
                             gamerun()
                             break
                         elif event.key == pygame.K_BACKSPACE:
@@ -212,9 +219,10 @@ class Qtyping:
         self.draw_text(self.screen, self.word, 200, 28, self.TEXT_C)
         pygame.display.update()
 
+
 # TeamUser_Call
 def Solo_Team():
-    input_box = pygame.Rect(50, 100, 0, 32)
+    input_box = pygame.Rect(100, 100, 0, 32)
     color_inactive = pygame.Color('lightskyblue3')
     color_active = pygame.Color('dodgerblue2')
     color = color_inactive
@@ -247,7 +255,7 @@ def Solo_Team():
                         text += event.unicode
 
         disp.fill(white)
-        pygame.draw.rect(disp, black, (0, 0, 640, 480), 5)
+        pygame.draw.rect(disp, black, (0, 0, dis_width, dis_height), 5)
 
         # Render the current text
         txt_surface = font.render(text, True, color)
@@ -302,7 +310,7 @@ def Snake_game():
         while game_close == True:
             disp.fill(white)
             # Draws the outline
-            pygame.draw.rect(disp, black, (0, 0, 680, 480), 5)
+            pygame.draw.rect(disp, black, (0, 0, dis_width, dis_height), 5)
             message("Press Q to return to the menu", black, 100, 100)
             Your_score(Length_of_snake - 1)
             pygame.display.update()
@@ -339,7 +347,7 @@ def Snake_game():
         y1 += y1_change
         disp.fill(white)
         pygame.draw.rect(disp, red, [foodx, foody, snake_block, snake_block, ])
-        pygame.draw.rect(disp, black, (0, 0, 680, 480), 5)
+        pygame.draw.rect(disp, black, (0, 0, 680*2, 480*2), 5)
         snake_Head = []
         snake_Head.append(x1)
         snake_Head.append(y1)
@@ -372,8 +380,21 @@ def message(msg, color, locol, locoh):
     mesg = font_style.render(msg, False, color)
     disp.blit(mesg, (locol, locoh))
 
+def reset():
+    global dis_height
+    global dis_width
+    global clock
+    global disp
+    dis_height = 480 * 2
+    dis_width = 640 * 2
+    disp = pygame.display.set_mode((dis_width, dis_height))
+    clock = pygame.time.Clock()
+    pygame.init()
 
 def gamerun():
+    reset()
+
+    pygame.display.update()
     # create button instances
     start_button = button.Button((dis_width / 2) - (140 * 0.7), 150, start_img, 1)
     exit_button = button.Button((dis_width / 2) - (140 * 0.7), 350, exit_img, 1)
@@ -381,10 +402,9 @@ def gamerun():
 
     run = False
     while not run:
-        player = 1
         disp.fill(white)
-        pygame.draw.rect(disp, black, (0, 0, 640*2, 480*2), 5)
-        message("SNAKE AND Quick Typing", black, 500,50)
+        pygame.draw.rect(disp, black, (0, 0, 640 * 2, 480 * 2), 5)
+        message("SNAKE AND Quick Typing", black, 500, 50)
         if start_button.draw(disp):  # main start once pressing start button
             print('Solo_Team has been Loaded')
             Solo_Team()
@@ -397,21 +417,25 @@ def gamerun():
             Qtyping().run()
 
         if Leader_Button.draw(disp):
-            new_saved()
             disp.fill(white)
-            #print("Player 1")
-            if data == True:
-                print("Player ",player)
-                print("User: ",L_user_saved,"\nSnake Score: ",L_snake_score, "\nWPM: ", L_wpm)
-                player =  player + 1
+            load_save()
             if data == False:
-                print("player",player)
-                print("User: ",N_user_saved,"\nSnake Score: ",N_snake_score, "\nWPM: ", N_wpm)
+                print("Player: ", Player)
+                print("===========")
+                print("User: ", user_saved,"\nSnake Score: ",snake_score,"\nWPM: ", wpmScore)
+                print("False")
+            if data == True:
+                print("Player", Player-1)
+                print("===========\nUser: ", olduser_saved,"\nSnake Score: ", oldsnake_score, "\nWPM: ", oldwpm)
+                print("True")
 
 
         if exit_button.draw(disp):
             print('EXIT')
+            #save data here maybe
             pygame.quit()
+            sys.exit()
+
 
         # event handler
         for event in pygame.event.get():
@@ -422,8 +446,5 @@ def gamerun():
         # Updates Display
         pygame.display.update()
 
-
-
-
-old_data_load()
+player_check()
 gamerun()

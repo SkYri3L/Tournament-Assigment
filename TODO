@@ -1,0 +1,10 @@
+Check for Saves and + 1 for each save found
+
+
+
+
+
+
+if oldname_nodata == True and snake_nodata == True and wpm_nodata == True:
+    print("No data Found")
+    data = False
