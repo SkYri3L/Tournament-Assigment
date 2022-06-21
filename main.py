@@ -14,16 +14,78 @@ exit_img = pygame.image.load('exit_btn.png').convert_alpha()
 lead_img = pygame.image.load('set_btn.png').convert_alpha()
 
 #loaded saved data
-with open('TeamUserName.pkl', 'rb') as SavName:
-    L_user_saved = pickle.load(SavName)
-    print("Loaded Last Saved User: ",L_user_saved)
-with open('Snake_score.pkl', 'rb') as snake_scr:
-    L_snake_score = pickle.load(snake_scr)
-    print("Loaded last Saved Snake Score: ",L_snake_score)
-with open('WPM.pkl', 'rb') as typesc:
-    L_wpm = pickle.load(typesc)
-    print("Loaded last saved WPM: ", L_wpm)
+def old_name_load():
+    global oldname_nodata
+    oldname_nodata = False
+    try:
+        with open('TeamUserName.pkl', 'rb') as oldname:
+            return pickle.load(oldname)
+    except EOFError:
+        print("no data name")
+        oldname_nodata = True
+        return None
+def old_snake_load():
+    global snake_nodata
+    snake_nodata = False
+    try:
+        with open('Snake_score.pkl', 'rb') as oldsnake:
+            return pickle.load(oldsnake)
+    except EOFError:
+        print("no data snake")
+        snake_nodata = True
+        return None
+def old_wpm_load():
+    global wpm_nodata
+    wpm_nodata = False
+    try:
+        with open('WPM.pkl', 'rb') as oldwpm:
+            return pickle.load(oldwpm)
+    except EOFError:
+        print("no data wpm")
+        wpm_nodata = True
+        return None
 
+def old_data_load():
+    global L_wpm
+    global L_user_saved
+    global L_snake_score
+    global data
+    old_wpm_load()
+    old_snake_load()
+    old_name_load()
+    data = True
+    if oldname_nodata != True:
+        with open('TeamUserName.pkl','rb') as oldname:
+            L_user_saved = pickle.load(oldname)
+            print("Old TeamName Loaded")
+    if snake_nodata != True:
+        with open('Snake_Score.pkl','rb') as oldsnake:
+            L_snake_score = pickle.load(oldsnake)
+            print("Old Snake Loaded")
+    if wpm_nodata != True:
+        with open('WPM.pkl','rb') as oldwpm:
+            L_wpm = pickle.load(oldwpm)
+            print("Old Wpm Loaded")
+    if oldname_nodata == True and snake_nodata == True and wpm_nodata == True:
+        print("No data Found")
+        data = False
+
+def new_saved():
+    global N_user_saved
+    global N_snake_score
+    global N_wpm
+    if data == False:
+        with open('TeamUserName.pkl', 'rb') as SavName:
+            N_user_saved = pickle.load(SavName)
+            print("Loaded Last Saved User: ", L_user_saved)
+        with open('Snake_score.pkl', 'rb') as snake_scr:
+            N_snake_score = pickle.load(snake_scr)
+            print("Loaded last Saved Snake Score: ", L_snake_score)
+        with open('WPM.pkl', 'rb') as typesc:
+            N_wpm = pickle.load(typesc)
+            print("Loaded last saved WPM: ", L_wpm)
+    else:
+        pass
 
 class Qtyping:
     def __init__(self):
@@ -319,7 +381,7 @@ def gamerun():
 
     run = False
     while not run:
-        saved = ""
+        player = 1
         disp.fill(white)
         pygame.draw.rect(disp, black, (0, 0, 640*2, 480*2), 5)
         message("SNAKE AND Quick Typing", black, 500,50)
@@ -335,10 +397,17 @@ def gamerun():
             Qtyping().run()
 
         if Leader_Button.draw(disp):
+            new_saved()
             disp.fill(white)
-            print("User: ",L_user_saved)
-            print("Snake Score: ",L_snake_score)
-            print("WPM: ",L_wpm)
+            #print("Player 1")
+            if data == True:
+                print("Player ",player)
+                print("User: ",L_user_saved,"\nSnake Score: ",L_snake_score, "\nWPM: ", L_wpm)
+                player =  player + 1
+            if data == False:
+                print("player",player)
+                print("User: ",N_user_saved,"\nSnake Score: ",N_snake_score, "\nWPM: ", N_wpm)
+
 
         if exit_button.draw(disp):
             print('EXIT')
@@ -353,4 +422,8 @@ def gamerun():
         # Updates Display
         pygame.display.update()
 
+
+
+
+old_data_load()
 gamerun()
